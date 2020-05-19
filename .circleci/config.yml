@@ -1,0 +1,20 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    executor: python/default
+    steps:
+      - checkout
+      - attach-workspace:
+          at: workspace
+      - run:
+          name: Write to workspace
+          command: echo foobar > workspace/${CIRCLE_NODE_INDEX}/foobar
+      - deploy:
+          name: Collect Results
+          command: |
+            ls -R workspace
+workflows:
+  main:
+    jobs:
+      - build-and-test
