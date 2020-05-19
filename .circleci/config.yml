@@ -2,7 +2,8 @@ version: 2.1
 
 jobs:
   build-and-test:
-    executor: python/default
+    docker:
+      - image: python:3.7.5
     steps:
       - checkout
       - attach-workspace:
